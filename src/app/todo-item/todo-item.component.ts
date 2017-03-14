@@ -15,6 +15,15 @@ export class TodoItemComponent implements OnInit {
   ngOnInit() {
   }
 
+  itemDone(text:HTMLParagraphElement){
+
+    if(text.style.textDecoration != "line-through"){
+      text.style.textDecoration = "line-through";
+    }else{
+      text.style.textDecoration = '';
+    }
+  }
+
   deleteMe(){
     this.deleteAnItem.emit(this.index);
   }
