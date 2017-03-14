@@ -1,16 +1,26 @@
 import {Injectable} from '@angular/core';
 import {TodoItemI} from '../../shared/todoItemI';
 import {ToDoItemImplToDoService} from './todoItemImpl-todoService';
+import 'rxjs/add/operator/map';
+import { Http } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class TodoListService {
     todo: Array<ToDoItemImplToDoService> = [];
 
-    contructor(){
+    constructor(private http: Http){
+
     }
 
-    getTodoList(): Array<TodoItemI>{
-        return this.todo;
+    getTodoList(): Observable<Array<TodoItemI>>{
+
+        return this.http
+        .get("http://www.json-generator.com/api/json/get/ckraFfvtNK")
+        .map( response => {
+            this.todo = response.json();
+            return response.json();
+        })
     }
 
     addItem(text:string): Array<TodoItemI>{

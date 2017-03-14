@@ -9,7 +9,11 @@ import { TodoItemI } from '../shared/todoItemI';
 })
 export class TodoDisplayComponent implements OnInit {
   public todoList: Array<TodoItemI> = [];
-  constructor(private todoService:TodoListService) { }
+
+  constructor(private todoService:TodoListService) {
+    this.todoService.getTodoList().subscribe(response =>  {
+      return this.todoList = response});
+   }
 
   ngOnInit() {
   }
