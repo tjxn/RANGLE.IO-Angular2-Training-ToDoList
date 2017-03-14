@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoListService } from '../services/todoService/todo.service';
-import { ToDoItemImpl } from '../shared/todoItemImpl';
+import { TodoItemI } from '../shared/todoItemI';
 
 @Component({
   selector: 'app-todo-display',
@@ -8,14 +8,14 @@ import { ToDoItemImpl } from '../shared/todoItemImpl';
   styleUrls: ['./todo-display.component.css']
 })
 export class TodoDisplayComponent implements OnInit {
-  public todoList: Array<ToDoItemImpl> = [];
+  public todoList: Array<TodoItemI> = [];
   constructor(private todoService:TodoListService) { }
 
   ngOnInit() {
   }
 
   addToList(value:string){
-     this.todoList = this.todoService.addItem(new ToDoItemImpl(value));
+     this.todoList = this.todoService.addItem(value);
   }
 
   deleteItem(index:number){

@@ -13,8 +13,8 @@ export class TodoListService {
         return this.todo;
     }
 
-    addItem(item:TodoItemI): Array<TodoItemI>{
-        let todoItemForList = new ToDoItemImplToDoService(item.text, this.todo.length);
+    addItem(text:string): Array<TodoItemI>{
+        let todoItemForList = new ToDoItemImplToDoService(text, this.todo.length);
         this.todo.push(todoItemForList);
         return this.todo;
     }
@@ -23,5 +23,6 @@ export class TodoListService {
         this.todo.splice(index, 1);
         return this.todo;
     }
+
 
 }
