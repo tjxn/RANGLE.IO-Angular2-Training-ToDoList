@@ -2,36 +2,48 @@ import {Injectable} from '@angular/core';
 import {TodoItemI} from '../../shared/todoItemI';
 import {ToDoItemImplToDoService} from './todoItemImpl-todoService';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/map';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class TodoListService {
-    todo: Array<ToDoItemImplToDoService> = [];
+    todo: Subject<Array<TodoItemI>>;
+    state: Array<TodoItemI>;
 
     constructor(private http: Http){
-
+        this.state = [];
+        this.todo = new Subject();
+        this.initToDo().subscribe(response => {
+            this.state = response;
+            this.todo.next(this.state);
+        });
+            
     }
 
-    getTodoList(): Observable<Array<TodoItemI>>{
+    getTodoList(){
+        return this.todo;
+    }
 
+
+    initToDo(){
         return this.http
         .get("http://www.json-generator.com/api/json/get/ckraFfvtNK")
         .map( response => {
-            this.todo = response.json();
             return response.json();
-        })
+        });
     }
 
-    addItem(text:string): Array<TodoItemI>{
-        let todoItemForList = new ToDoItemImplToDoService(text, this.todo.length);
-        this.todo.push(todoItemForList);
-        return this.todo;
+    addItem(text:string){
+        this.state.push(new ToDoItemImplToDoService(text, 1));
+        this.todo.next(this.state);
     }
 
-    deleteItem(index: number): Array<TodoItemI> {
-        this.todo.splice(index, 1);
-        return this.todo;
+    deleteItem(index: number) {
+        this.state.splice(index, 1);
+        this.todo.next(this.state);
+ 
     }
 
 

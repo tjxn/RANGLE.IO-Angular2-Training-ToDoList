@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoListService } from '../services/todoService/todo.service';
 import { TodoItemI } from '../shared/todoItemI';
+import {Observable} from 'rxjs/Observable'
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-todo-display',
@@ -8,22 +10,23 @@ import { TodoItemI } from '../shared/todoItemI';
   styleUrls: ['./todo-display.component.css']
 })
 export class TodoDisplayComponent implements OnInit {
-  public todoList: Array<TodoItemI> = [];
+  public todoList: Array<TodoItemI>;
 
   constructor(private todoService:TodoListService) {
-    this.todoService.getTodoList().subscribe(response =>  {
-      return this.todoList = response});
+    this.todoService.getTodoList().subscribe(response => {
+      this.todoList = response;
+    })
    }
 
   ngOnInit() {
   }
 
   addToList(value:string){
-     this.todoList = this.todoService.addItem(value);
+     this.todoService.addItem(value);
   }
 
   deleteItem(index:number){
-    this.todoList = this.todoService.deleteItem(index);
+    this.todoService.deleteItem(index);
   }
 
 
