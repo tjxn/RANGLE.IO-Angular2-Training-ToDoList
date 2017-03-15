@@ -1,4 +1,5 @@
 <app-todo-add-item (addNewItem)="addToList($event)"></app-todo-add-item>
+<button  (click)="goToFormPage()">Go To Form Page</button>
 <ol>
   <li *ngFor="let item of todoList; let i = index">
     <app-todo-item [value]=item.label [index]=i (deleteAnItem)="deleteItem($event)"></app-todo-item>

@@ -15,7 +15,8 @@ export class TodoListService {
     constructor(private http: Http){
         this.state = [];
         this.todo = new Subject();
-        this.initToDo().subscribe(response => {
+        this.initToDo()
+        .subscribe(response => {
             this.state = response;
             this.todo.next(this.state);
         });
@@ -29,10 +30,11 @@ export class TodoListService {
 
     initToDo(){
         return this.http
-        .get("http://www.json-generator.com/api/json/get/ckraFfvtNK")
+        .get("http://www.json-generator.com/api/json/get/cpZJxAojhe")
         .map( response => {
             return response.json();
-        });
+        })
+        .map(response => response.filter(x => x.problem != true));
     }
 
     addItem(text:string){

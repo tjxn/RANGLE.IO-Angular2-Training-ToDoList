@@ -1,4 +1,12 @@
-<div>
-  <input #addItemValue type="text" placeholder="Add Item...">
-  <button (click)="addItem(addItemValue)">Add</button>
-<div>
+<form [formGroup]="myForm"  (ngSubmit)="addItem(addItemValue)">
+  <div class="errors" [hidden]="myForm.controls.addItemControl.valid || myForm.controls.addItemControl.untouched" >
+    <p [hidden]="!myForm.controls.addItemControl.hasError('required')">
+      Error - Please enter something to do
+    </p>
+  </div>
+
+  <div>
+    <input #addItemValue type="text" [formControl]="myForm.controls.addItemControl">
+    <button type="submit">Add</button>
+  </div>
+</form>

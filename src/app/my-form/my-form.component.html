@@ -1,0 +1,19 @@
+<form [formGroup]="myForm"  (ngSubmit)="submitForm()">
+
+  <ul class="errors">
+    <li [hidden]="username.valid || username.untouched">text</li>
+  </ul>
+
+  <div>
+  <label for="username">Username</label>
+  <input  type="text" id="username" [formControl]="username">
+  </div>
+
+  <label for="email">Email</label>
+  <input type="text" id="email" [formControl]="email">
+<div>
+  <label for="password">Password</label>
+  <input type="password" id="password" [formControl]="password">
+</div>
+  <button type="submit">Sign Up</button>
+</form>
