@@ -14,11 +14,17 @@ import { MyFormComponent } from './my-form/my-form.component';
 import { MenuComponent } from './menu/menu.component';
 
 
-const routes: Routes = [
+export const routes: Routes = [
   { path: '', redirectTo: 'forms-demo', pathMatch: 'full' },
-  { path: 'forms-demo', component: MyFormComponent},
-  { path: 'todo-demo', component: TodoDisplayComponent},
-  { path: '**', component: TodoDisplayComponent},
+  { path: 'menu', component: MenuComponent},
+  { path: 'todo-demo/:firstname/:lastname', component: TodoDisplayComponent},
+  { path: 'forms-demo', component: MyFormComponent,
+    children: [
+      { path: '', redirectTo: 'forms-demo', pathMatch: 'full' },
+      { path: 'menu', component: MenuComponent},
+      { path: 'test', component: ObservableTestComponent},
+    ]
+  }
 ];
 
 @NgModule({

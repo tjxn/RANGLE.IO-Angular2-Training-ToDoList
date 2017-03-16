@@ -1,2 +1,3 @@
 <a [routerLink]="['/forms-demo']">Form Demo</a>
-<a [routerLink]="['/todo-demo']">Todo Demo</a>
+<a [routerLink]="['/todo-demo']" [queryParams]="{ page: 99 }">Todo Demo - Page 99</a>
+<router-outlet></router-outlet>

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoListService } from '../services/todoService/todo.service';
 import { TodoItemI } from '../shared/todoItemI';
-import {Observable, Subject} from 'rxjs/Rx'
-import { Routes, RouterModule} from '@angular/router';
+import {Observable} from 'rxjs/Rx'
+import { Router, RouterModule, ActivatedRoute} from '@angular/router';
 @Component({
   selector: 'app-todo-display',
   templateUrl: './todo-display.component.html',
@@ -11,7 +11,8 @@ import { Routes, RouterModule} from '@angular/router';
 export class TodoDisplayComponent implements OnInit {
   public todoList: Array<TodoItemI>;
 
-  constructor(private todoService:TodoListService,
+  constructor(private todoService:TodoListService, private route: ActivatedRoute,
+  private router: Router
   ) {
     this.todoService.getTodoList()
     .subscribe(response => {
@@ -20,10 +21,18 @@ export class TodoDisplayComponent implements OnInit {
    }
 
   ngOnInit() {
+        this.route.params.subscribe(params => {
+      console.log(params);
+    })
+
+    this.route.queryParams.subscribe(queryParams => {
+      console.log(queryParams);
+    })
   }
 
+
   goToFormPage(){
-    this.router.navigate(['/todo-demo']);
+    this.router.navigate(['/forms-demo']);
   }
   
 

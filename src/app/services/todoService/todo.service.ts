@@ -5,16 +5,16 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/map';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class TodoListService {
-    todo: Subject<Array<TodoItemI>>;
+    todo: BehaviorSubject<Array<TodoItemI>>;
     state: Array<TodoItemI>;
 
     constructor(private http: Http){
         this.state = [];
-        this.todo = new Subject();
+        this.todo = new BehaviorSubject([]);
         this.initToDo()
         .subscribe(response => {
             this.state = response;
